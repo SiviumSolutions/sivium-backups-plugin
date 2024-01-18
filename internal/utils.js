@@ -3,7 +3,7 @@ const fs = require('fs');
 const path = require('path');
 const tar = require('tar');
 
-const tmpDir = () => path.join(process.cwd(), `/.temp/sivium-plugin-backup`);
+const tmpDir = () => path.join(process.cwd(), `/.tmp/backups`);
 const createTmpFilename = () => `${tmpDir()}/${Date.now()}-${crypto.randomBytes(16).toString('hex')}`;
 
 const createArchive = (source, destination) => {
