@@ -5,6 +5,15 @@ const {
 } = require('../backend/services/utils');
 
 module.exports = ({strapi}) => {
+  const isClusterMode = process.env.NODE_APP_INSTANCE !== undefined;
+  const isMainClusterInstance = parseInt(process.env.NODE_APP_INSTANCE, 10) === 0;
+
+  if (isClusterMode) {
+    if (!isMainClusterInstance) { 
+      return {}
+    } 
+  }
+
   const backupConfig = strapi.config.get('plugin.backup');
   const backupService = strapi.plugin('backup').service('backup');
   const backupLogService = strapi.plugin('backup').service('log');
